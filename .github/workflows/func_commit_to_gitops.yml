@@ -40,7 +40,7 @@ jobs:
           token: ${{ secrets.GITOPS_PATOKEN }}
           branch: main
           repository: cross-space-official/gitops
-          workDir: .
+          workDir: gitops/
           message: 'Commit service staging with ${{ inputs.tag }}'
           commitUserName: 'mbytesbot'
           commitUserEmail: 'github-bot@meta-bytes.io'
