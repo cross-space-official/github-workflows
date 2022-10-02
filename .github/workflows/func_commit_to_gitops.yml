@@ -1,0 +1,46 @@
+name: commit_gitops
+on:
+  workflow_call:
+    inputs:
+      app_name:
+        required: true
+        type: string
+      registry_name:
+        required: true
+        type: string
+      tag:
+        required: true
+        type: string
+      values_yaml_path:
+        required: true
+        type: string
+      property_path:
+        required: true
+        type: string
+    secrets:
+      GITOPS_PATOKEN:
+        required: true
+jobs:
+  commit_to_gitops:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: cross-space-official/gitops
+          token: ${{ secrets.GITOPS_PATOKEN }}
+          path: gitops
+      - name: Update staging yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: ${{ inputs.values_yaml_path }}
+          propertyPath: ${{ inputs.property_path }}
+          value: ${{ inputs.tag }}
+          commitChange: true
+          updateFile: true
+          token: ${{ secrets.GITOPS_PATOKEN }}
+          branch: main
+          repository: cross-space-official/gitops
+          message: 'Commit service staging with ${{ inputs.tag }}'
+          commitUserName: 'mbytesbot'
+          commitUserEmail: 'github-bot@meta-bytes.io'
