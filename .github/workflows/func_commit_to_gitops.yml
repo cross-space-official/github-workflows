@@ -29,6 +29,7 @@ jobs:
         with:
           repository: cross-space-official/gitops
           token: ${{ secrets.GITOPS_PATOKEN }}
+          path: gitops
       - name: Update staging yaml
         uses: fjogeleit/yaml-update-action@main
         with:
