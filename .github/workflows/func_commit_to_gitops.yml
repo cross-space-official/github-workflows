@@ -44,3 +44,4 @@ jobs:
           message: 'Commit service staging with ${{ inputs.tag }}'
           commitUserName: 'mbytesbot'
           commitUserEmail: 'github-bot@meta-bytes.io'
+          masterBranchName: main
