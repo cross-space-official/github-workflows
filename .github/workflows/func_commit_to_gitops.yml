@@ -36,11 +36,14 @@ jobs:
           valueFile: ${{ inputs.values_yaml_path }}
           propertyPath: ${{ inputs.property_path }}
           value: ${{ inputs.tag }}
+          repository: cross-space-official/gitops
           commitChange: true
           updateFile: true
+          createPR: true
           token: ${{ secrets.GITOPS_PATOKEN }}
-          branch: main
-          repository: cross-space-official/gitops
+          branch: release-${{ inputs.app_name }}-${{ inputs.tag }}
+          title: Release ${{ inputs.app_name }} ${{ inputs.tag }}
+          targetBranch: main
           workDir: gitops/
           message: 'Commit service staging with ${{ inputs.tag }}'
           commitUserName: 'mbytesbot'
