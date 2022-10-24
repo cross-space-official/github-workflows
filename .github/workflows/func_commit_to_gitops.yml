@@ -17,6 +17,10 @@ on:
       property_path:
         required: true
         type: string
+      target_repo:
+        required: false
+        type: string
+        default: cross-space-official/gitops
     secrets:
       GITOPS_PATOKEN:
         required: true
@@ -36,7 +40,7 @@ jobs:
           valueFile: ${{ inputs.values_yaml_path }}
           propertyPath: ${{ inputs.property_path }}
           value: ${{ inputs.tag }}
-          repository: cross-space-official/gitops
+          repository: ${{ inputs.target_repo }}
           commitChange: true
           updateFile: true
           createPR: true
