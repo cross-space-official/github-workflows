@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: cross-space-official/gitops
+          repository: ${{ inputs.target_repo }}
           token: ${{ secrets.GITOPS_PATOKEN }}
           path: gitops
       - name: Update staging yaml
