@@ -21,6 +21,14 @@ on:
         required: false
         type: string
         default: cross-space-official/gitops
+      committer_name:
+        required: false
+        type: string
+        default: mbytesbot
+      committer_email:
+        required: false
+        type: string
+        default: github-bot@meta-bytes.io
     secrets:
       GITOPS_PATOKEN:
         required: true
@@ -33,6 +41,7 @@ jobs:
         with:
           repository: ${{ inputs.target_repo }}
           token: ${{ secrets.GITOPS_PATOKEN }}
+          ref: main
           path: work-dir
       - name: Update staging yaml
         uses: fjogeleit/yaml-update-action@main
@@ -50,6 +59,6 @@ jobs:
           targetBranch: main
           workDir: work-dir/
           message: 'Commit ${{ inputs.app_name }} with ${{ inputs.tag }}'
-          commitUserName: 'mbytesbot'
-          commitUserEmail: 'github-bot@meta-bytes.io'
+          commitUserName: ${{ inputs.committer_name }}
+          commitUserEmail: ${{ inputs.committer_email }}
           masterBranchName: main
