@@ -40,6 +40,8 @@ jobs:
           go-version: 1.18
           cache: true
       - run: git config --global url.https://${{ secrets.GORELEASE_TOKEN }}@github.com/cross-space-official.insteadOf https://github.com/cross-space-official
+      - name: Login Registry
+        run: echo -n "${{ secrets.GOOGLE_REGISTRY_BASE64 }}" | docker login -u _json_key_base64 --password-stdin https://asia-southeast1-docker.pkg.dev
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3
         with:
@@ -52,9 +54,6 @@ jobs:
           SERVICE_NAME: ${{ inputs.app_name }}
           REGISTRY_NAME: ${{ inputs.registry_name }}
           TAG: ${{ inputs.tag }}
-      - name: Login Registry
-        if: ${{ inputs.skip_publish == false }}
-        run: echo -n "${{ secrets.GOOGLE_REGISTRY_BASE64 }}" | docker login -u _json_key_base64 --password-stdin https://asia-southeast1-docker.pkg.dev
       - name: Upload to Artifact Registry
         if: ${{ inputs.skip_publish == false }}
         run: docker push ${{ inputs.registry_name }}/${{ inputs.app_name }}:${{ inputs.tag }}
