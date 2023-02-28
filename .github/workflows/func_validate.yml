@@ -1,5 +1,11 @@
 name: validate
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      with_libvips:
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   lint:
@@ -7,6 +13,7 @@ jobs:
     container: golang:1.18.1-bullseye
     steps:
       - name: Prepare Libvips
+        if: ${{ inputs.with_libvips == true }}
         run: |
           apt-get update
           apt-get install -y libvips libvips-dev
