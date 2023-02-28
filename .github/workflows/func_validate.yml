@@ -31,6 +31,11 @@ jobs:
     runs-on: ubuntu-latest
     container: golang:1.18.1-bullseye
     steps:
+      - name: Prepare Libvips
+        if: ${{ inputs.with_libvips == true }}
+        run: |
+          apt-get update
+          apt-get install -y libvips libvips-dev
       - name: Checkout
         uses: actions/checkout@v3
       - run: make ut
