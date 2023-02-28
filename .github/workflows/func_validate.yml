@@ -6,10 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     container: golang:1.18.1-bullseye
     steps:
-      - run: sudo apt-get install -y libvips
+      - name: Prepare Libvips
+        run: |
+          apt-get update
+          apt-get install -y libvips
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Prepare
+      - name: Prepare Go
         uses: actions/setup-go@v3
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
