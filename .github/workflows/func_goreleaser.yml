@@ -29,13 +29,6 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
-      - name: Prepare Libvips
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pkg-config 
-          sudo apt-get install -y libvips libvips-dev
-      - name: Doublecheck
-        run: pkg-config --cflags vips
       - name: Checkout
         uses: actions/checkout@v3
         with:
