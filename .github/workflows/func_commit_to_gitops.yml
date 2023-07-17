@@ -52,7 +52,7 @@ jobs:
           repository: ${{ inputs.target_repo }}
           commitChange: true
           updateFile: true
-          createPR: true
+          createPR: false
           token: ${{ secrets.GITOPS_PATOKEN }}
           branch: release-${{ inputs.app_name }}-${{ inputs.tag }}
           title: Release ${{ inputs.app_name }} ${{ inputs.tag }}
