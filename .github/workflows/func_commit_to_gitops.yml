@@ -29,6 +29,10 @@ on:
         required: false
         type: string
         default: github-bot@meta-bytes.io
+      create_pr:
+        required: false
+        type: boolean
+        default: false
     secrets:
       GITOPS_PATOKEN:
         required: true
@@ -52,9 +56,9 @@ jobs:
           repository: ${{ inputs.target_repo }}
           commitChange: true
           updateFile: true
-          createPR: false
+          createPR: true
           token: ${{ secrets.GITOPS_PATOKEN }}
-          branch: main
+          branch: ${{ inputs.create_pr && 'release-${{ inputs.app_name }}-${{ inputs.tag }}' || 'main'}}
           title: Release ${{ inputs.app_name }} ${{ inputs.tag }}
           targetBranch: main
           workDir: work-dir/
