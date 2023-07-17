@@ -54,7 +54,7 @@ jobs:
           updateFile: true
           createPR: false
           token: ${{ secrets.GITOPS_PATOKEN }}
-          branch: release-${{ inputs.app_name }}-${{ inputs.tag }}
+          branch: main
           title: Release ${{ inputs.app_name }} ${{ inputs.tag }}
           targetBranch: main
           workDir: work-dir/
