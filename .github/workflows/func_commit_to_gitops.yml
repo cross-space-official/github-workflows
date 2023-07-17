@@ -58,7 +58,7 @@ jobs:
           updateFile: true
           createPR: ${{ inputs.create_pr }}
           token: ${{ secrets.GITOPS_PATOKEN }}
-          branch: ${{ inputs.create_pr && 'release-${{ inputs.app_name }}-${{ inputs.tag }}' || 'main'}}
+          branch: ${{ inputs.create_pr && format('release-{0}-{1}', inputs.app_name, inputs.tag) || 'main'}}
           title: Release ${{ inputs.app_name }} ${{ inputs.tag }}
           targetBranch: main
           workDir: work-dir/
