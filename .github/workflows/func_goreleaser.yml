@@ -37,7 +37,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: 1.18
+          go-version: 1.20.3
           cache: true
       - run: git config --global url.https://${{ secrets.GORELEASE_TOKEN }}@github.com/cross-space-official.insteadOf https://github.com/cross-space-official
       - name: Login Registry
