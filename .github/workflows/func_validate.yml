@@ -30,7 +30,7 @@ jobs:
   unit-test:
     needs: lint
     runs-on: ubuntu-latest
-    container: golang:1.18.1-bullseye
+    container: golang:1.20.3-bullseye
     steps:
       - name: Prepare Libvips
         if: ${{ inputs.with_libvips == true }}
