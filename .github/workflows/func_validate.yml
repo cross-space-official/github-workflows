@@ -10,7 +10,10 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container: golang:1.22.6-bullseye
+    container:
+      image: golang:1.22.6-bullseye
+      env:
+        GOFLAGS: "-buildvcs=false"
     steps:
       - name: Prepare Libvips
         if: ${{ inputs.with_libvips == true }}
@@ -30,7 +33,10 @@ jobs:
   unit-test:
     needs: lint
     runs-on: ubuntu-latest
-    container: golang:1.22.6-bullseye
+    container:
+      image: golang:1.22.6-bullseye
+      env:
+        GOFLAGS: "-buildvcs=false"
     steps:
       - name: Prepare Libvips
         if: ${{ inputs.with_libvips == true }}
